@@ -1,0 +1,14 @@
+version: '3.9'
+services:
+  fa_for_ml:
+    image: fa_ml
+    container_name: fa_for_ml
+    runtime: nvidia
+    tty: true
+    stdin_open: true
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ./:/workspace/src
