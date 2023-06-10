@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+# 2次元平面上にデータ点が分布する時に、重回帰で回帰するケース
+
 
 def generate_training_data(a0=2, a1=0.3, a2=-0.5, n=20):
     np.random.seed(1)

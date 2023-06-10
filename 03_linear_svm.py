@@ -1,6 +1,14 @@
 import cvxpy as cp
 import matplotlib.pyplot as plt
 import numpy as np
+from japanize_matplotlib import japanize
+
+japanize()
+
+# 線形SVMの例
+# 点線が真の境界線
+# 赤線が線形SVMで求めた境界線
+# 矩形で囲われた点がサポートベクトル
 
 
 def generate_train_data(n=10):
@@ -59,12 +67,14 @@ def draw_result(D_plus, D_minus, c, sv):
     x2 = (1 / 1.5) * x1
     x2_sol = -(c[0] / c[1]) * x1 - (c[2] / c[1])
 
-    fig, ax = plt.subplots()
-    ax.plot(x1, x2, ls='--', c='black')
-    ax.plot(x1, x2_sol, c='red')
-    ax.scatter(D_plus[0], D_plus[1], marker='x')
-    ax.scatter(D_minus[0], D_minus[1], marker='o')
-    ax.scatter(sv[0], sv[1], marker='s', color='k', fc='none')
+    fig, ax = plt.subplots(figsize=(13, 10))
+    ax.plot(x1, x2, ls='--', c='black', label='True Function')
+    ax.plot(x1, x2_sol, c='red', label='Function $f$ (Solution)')
+    ax.scatter(D_minus[0], D_minus[1], marker='o', label='正例')
+    ax.scatter(D_plus[0], D_plus[1], marker='x', label='負例')
+    ax.scatter(sv[0], sv[1], marker='s', color='k', fc='none', label='Support Vector')
+    ax.legend(loc='upper left', bbox_to_anchor=(1, 1))
+    ax.set_aspect('equal')
     plt.xlabel('$x_1$')
     plt.ylabel('$x_2$')
     plt.show()

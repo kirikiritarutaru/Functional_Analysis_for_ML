@@ -1,6 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+# 1次関数の周りにデータ点が分布する時に、1次関数で回帰するケース
+# そりゃうまくいくよね
+
 
 def generate_training_data(a0=3, a1=0.5, n=10):
     np.random.seed(3)
