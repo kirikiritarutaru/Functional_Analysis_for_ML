@@ -1,5 +1,5 @@
 {
-    "editor.fontFamily": "HackGen Console NFJ",
+    "editor.fontFamily": "HackGen Console NF",
     "[python]": {
         "editor.defaultFormatter": "ms-python.autopep8"
     },
