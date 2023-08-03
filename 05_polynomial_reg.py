@@ -1,7 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-# 多項式回帰の例
+'''
+- 多項式回帰の例
+    - 用意する多項式の次数dを大きくすると、データがある範囲（-3≦x≦2.3）でのあてはまりが良い
+    - データがない領域（x≧2.3）では、f(x)が大きく増大していることがわかる
+        - 次数dの大きい多項式を使うから当たり前といえば当たり前
+    - この特性が不適か否かは対象とする問題に依存する
+'''
 
 
 def generate_training_data(n=4, d=2):
@@ -38,8 +44,8 @@ def polynomial_reg(x_data, lam_data, d):
     ax.plot(x, lam, ls='--', label='True Function $f_T$')
     ax.plot(x, lam_sol, label='Function $f$ (Solution)')
     ax.scatter(x_data, lam_data, marker='+', label='Training Data', s=100, c='black')
-    ax.set_xlim(-3, 3)
-    ax.set_ylim(-4, 4)
+    ax.set_xlim(-5, 5)
+    ax.set_ylim(-5, 5)
     ax.legend(loc='lower left')
     plt.xlabel('$x$')
     plt.ylabel('$f(x)$')
