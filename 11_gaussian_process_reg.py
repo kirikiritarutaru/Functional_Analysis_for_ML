@@ -3,6 +3,9 @@ import math
 import GPy
 import matplotlib.pyplot as plt
 import numpy as np
+from japanize_matplotlib import japanize
+
+japanize()
 
 # ガウス過程回帰
 
@@ -71,18 +74,35 @@ def show_training_result(model, x_data, z_data):
     z_var = K_ss - k_s @ invK @ k_s.T
     z_stdv = np.sqrt(np.diag(z_var))
 
-    fig, ax = plt.subplots()
-    ax.plot(x, z_mean)
-    ax.plot(x, y, ls='--')
-    ax.scatter(x_data, z_data, marker='+')
-    ax.fill_between(
+    z_samples = np.random.multivariate_normal(z_mean, z_var, 10).T
+
+    fig, axes = plt.subplots(nrows=1, ncols=2, figsize=(20, 8), sharey=True)
+    axes[0].plot(x, z_mean)
+    axes[0].plot(x, y, ls='--')
+    axes[0].scatter(x_data, z_data, marker='+')
+    axes[0].fill_between(
         x.flatten(),
         (z_mean - 2 * z_stdv).flatten(),
         (z_mean + 2 * z_stdv).flatten(),
         alpha=0.15
     )
-    plt.xlabel('$x$')
-    plt.ylabel('$z(x)$')
+    axes[0].set_xlabel('$x$')
+    axes[0].set_ylabel('$z(x)$')
+    axes[0].set_title('$z(x)$の平均と分散の描画')
+
+    axes[1].plot(x, z_samples)
+    axes[1].scatter(x_data, z_data, marker='+')
+    axes[1].fill_between(
+        x.flatten(),
+        (z_mean - 2 * z_stdv).flatten(),
+        (z_mean + 2 * z_stdv).flatten(),
+        alpha=0.15
+    )
+
+    axes[1].set_xlabel('$x$')
+    axes[1].set_title('予測分布にしたがうベクトルの描画')
+
+    plt.tight_layout()
     plt.show()
 
 
